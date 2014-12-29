@@ -15,9 +15,9 @@ The game ends:
 ---------------------|-------------------
 create/initialize    |  -
 be_empty             |  -
-be_full              |  -
 accept_play/set      |  Player, Cell
 has_cell_array       |  Cell
+be_full              |  -
 game_over(uses full) |  -
 
 
@@ -29,15 +29,15 @@ play                 |  Board
 ##Cell
     Responsibility   |  Collaborators
 ---------------------|-------------------
-be_x_0_nil           |  Board
+has_status(be_x_0_nil)           |  Board
 
 
 ##Main Game Logic
 
 ###method set_new_game
 Create an empty board
-Create player1(with X)
-Create player2(with 0)
+Create player1 (with X)
+Create player2 (with 0)
 
 ###method set_gameplay
 
