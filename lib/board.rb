@@ -91,7 +91,6 @@ class Board
     # first diagonal check
     def diagonal_complete(player)  
       0.upto(@size - 1) do |i|
-        # puts "state#{i}#{i} = #{@matrix[i][i].state}"
         return false if @matrix[i][i].state != player.symbol
       end
       true
@@ -100,7 +99,6 @@ class Board
     # second diagonal check
     def second_diagonal_complete(player)
       0.upto(@size - 1) do |i|
-        # puts "#{i}, #{@size - 1 - i}"
         j = @size - 1 - i
         return false if @matrix[i][j].state != player.symbol
       end
