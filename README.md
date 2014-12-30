@@ -44,9 +44,9 @@ Create player2 (with 0)
 let player1 play:
 
  * accept coordinates
- * place on board
- * check if !game_over(from board)
- * switch players
+ * while !game_over?(from board)
+  * place on board
+  * switch players
 
 ###method game_over (in class Board)
 Checks if the game is over or not

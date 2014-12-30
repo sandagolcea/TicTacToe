@@ -19,15 +19,28 @@ class Board
 
   def set(coord,player)
     x,y = translate(coord)
+  
     return false if !valid_coordinates?(x,y)
+    return false if cell_already_set?(x,y)
+
     @matrix[x][y].state = player.symbol
     # puts "Matrix #{x}#{y} value: #{@matrix[x][y].state}"
+    # true
+  end
+
+  def full?
+    return true if @matrix.all? { |row| row.all? { |cell| (cell.state == "X" || cell.state == "0") } }
+    false
+  end
+
+  def game_over?
+    
   end
 
   private
 
   def translate(coord)
-    #A1..A3, A1..C1
+    # A1..A3, A1..C1
     array = coord.split(//)
     x = array.shift.ord - "A".ord
     y = array.join.to_i - 1
@@ -36,6 +49,11 @@ class Board
 
   def valid_coordinates?(x,y)
     return false if ( x < 0 || x >= @size || y < 0 || y >= @size )
+    true
+  end
+
+  def cell_already_set?(x,y)
+    return false if @matrix[x][y].state == nil
     true
   end
 end

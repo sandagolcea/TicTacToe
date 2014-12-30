@@ -18,13 +18,22 @@ def set_new_game
 end
 
 def place_symbol
-  puts "Give coordinates:" ; coord = gets.chomp
-  @board.set(coord,@current_player)
+  bool = false
+
+  until bool
+    print "Give coordinates: " ; coord = gets.chomp
+    bool = @board.set(coord,@current_player) 
+  end
+end
+
+def switch_players
+  @current_player = @player1 ? (@current_player = @player2) : (@current_player = @player1)
 end
 
 def play
   set_new_game
   place_symbol
+  switch_players
 end
 
 play
