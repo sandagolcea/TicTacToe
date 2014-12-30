@@ -56,4 +56,55 @@ describe Board do
     expect(board).to be_full
   end
 
+  it 'ends game if a row is complete with the same symbol' do
+    # TODO: make non size specific
+    coord_array = ["A1","A2"]
+    coord_array.each {|coord| board.set(coord,player) }
+    coord = "A3"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq true
+  end
+
+  it 'does not end game if a row is not complete with the same symbol' do
+    # TODO: make non size specific
+    board.set("A1",player)
+    coord = "A3"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq false
+  end
+
+  it 'ends game if a column is complete with the same symbol' do
+    # TODO: make non size specific
+    coord_array = ["A1","B1"]
+    coord_array.each {|coord| board.set(coord,player) }
+    coord = "C1"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq true
+  end
+
+  it 'does not end game if a column is not complete with the same symbol' do
+    # TODO: make non size specific
+    coord_array = ["A1"]
+    coord_array.each {|coord| board.set(coord,player) }
+    coord = "C1"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq false
+  end
+
+  it 'should end game if first diagonal is complete' do
+    coord_array = ["A1","B2"]
+    coord_array.each {|coord| board.set(coord,player) }
+    coord = "C3"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq true
+  end
+
+  it 'should end game if the second diagonal is complete' do
+    coord_array = ["A3","B2"]
+    coord_array.each {|coord| board.set(coord,player) }
+    coord = "C1"
+    board.set(coord,player)
+    expect(board.game_over?(coord,player)).to eq true
+  end
+
 end

@@ -33,27 +33,78 @@ class Board
     false
   end
 
-  def game_over?
+  def game_over?(coord,player)
+    x,y = translate(coord)
     
+    return true if line_complete(x,player)
+    return true if column_complete(y,player)
+    
+    # main diagonal
+    if x == y 
+      return true if diagonal_complete(player)
+    end
+
+    # secondary diagonal
+    if x + y == @size - 1
+      return true if second_diagonal_complete(player)
+    end
+
+    false
   end
 
   private
 
-  def translate(coord)
-    # A1..A3, A1..C1
-    array = coord.split(//)
-    x = array.shift.ord - "A".ord
-    y = array.join.to_i - 1
-    [x,y]
-  end
+    def translate(coord)
+      # A1..A3, A1..C1
+      array = coord.split(//)
+      x = array.shift.ord - "A".ord
+      y = array.join.to_i - 1
+      [x,y]
+    end
 
-  def valid_coordinates?(x,y)
-    return false if ( x < 0 || x >= @size || y < 0 || y >= @size )
-    true
-  end
+    def valid_coordinates?(x,y)
+      return false if ( x < 0 || x >= @size || y < 0 || y >= @size )
+      true
+    end
 
-  def cell_already_set?(x,y)
-    return false if @matrix[x][y].state == nil
-    true
-  end
+    def cell_already_set?(x,y)
+      return false if @matrix[x][y].state == nil
+      true
+    end
+
+    def line_complete(x,player)
+      check_array = 0
+      0.upto(@size - 1) do |i|
+        check_array += 1 if @matrix[x][i].state == player.symbol
+      end
+      check_array == @size
+    end
+
+    def column_complete(y,player)
+      check_array = 0
+      0.upto(@size - 1) do |i|
+        check_array += 1 if @matrix[i][y].state == player.symbol
+      end
+      check_array == @size
+    end
+
+    # first diagonal check
+    def diagonal_complete(player)  
+      0.upto(@size - 1) do |i|
+        # puts "state#{i}#{i} = #{@matrix[i][i].state}"
+        return false if @matrix[i][i].state != player.symbol
+      end
+      true
+    end
+
+    # second diagonal check
+    def second_diagonal_complete(player)
+      0.upto(@size - 1) do |i|
+        # puts "#{i}, #{@size - 1 - i}"
+        j = @size - 1 - i
+        return false if @matrix[i][j].state != player.symbol
+      end
+      true
+    end
+
 end
