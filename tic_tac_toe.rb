@@ -18,10 +18,11 @@ def set_new_game
 end
 
 def place_symbol
+  @board.display
   symbol_placed = false
 
   until symbol_placed
-    print "#{@current_player.name} - Give coordinates: " ; @coord = gets.chomp
+    print "#{@current_player.name} - #{@current_player.symbol} - Give coordinates: " ; @coord = gets.chomp
     symbol_placed = @board.set(@coord,@current_player) 
   end
 end
@@ -30,14 +31,24 @@ def switch_players
   @current_player == @player1 ? (@current_player = @player2) : (@current_player = @player1)
 end
 
+def clrscr
+  puts "\e[H\e[2J" # clears the screen
+end
+
+
 def play
+  clrscr
   set_new_game
+
+  clrscr
 
   loop do
     place_symbol
     break if @board.game_over?(@coord,@current_player)
     switch_players
+    clrscr
   end
+  
 end
 
 play

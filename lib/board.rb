@@ -52,6 +52,13 @@ class Board
     false
   end
 
+  def display
+    @matrix.each do |row|
+      row.each { |elem| elem.state != nil ? (print " #{elem.state}") : (print " *") }
+      puts
+    end
+  end
+
   private
 
     def translate(coord)
