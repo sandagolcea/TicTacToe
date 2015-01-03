@@ -1,5 +1,6 @@
 require "./lib/Board"
 require "./lib/Player"
+require "cowsay"
 
 #so far made cell and player
 def set_new_game
@@ -35,6 +36,13 @@ def clrscr
   puts "\e[H\e[2J" # clears the screen
 end
 
+def show_winner
+  if @board.full? 
+    puts "\nIt's a draw!\n"
+  else
+    (puts Cowsay.say("#{@current_player.name.capitalize} wins!")) if @board.game_over?(@coord,@current_player)
+  end
+end
 
 def play
   clrscr
@@ -44,10 +52,12 @@ def play
 
   loop do
     place_symbol
-    break if @board.game_over?(@coord,@current_player)
+    break if @board.game_over?(@coord,@current_player) || @board.full?
     switch_players
     clrscr
   end
+
+  show_winner
   
 end
 
