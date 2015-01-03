@@ -3,19 +3,26 @@ TicTacToe
 
 Tic tac toe game (practice)
 
-Players can alternatively place X and 0 on the board.
+Players can alternatively place X and 0 on the board until either one player wins or it's a draw.
+
 The game ends:
-- when there are either no more cells empty (full board)
-- or 3 cells in a row/diagonal/col are either all X or all 0
+- when 3 cells in a row/diagonal/col are either all X or all 0
+- or when there are no more cells empty (full board - it's a draw)
+
 
 ##How to run
 This game is designed to be played from the command line.
 
-To run:
-`git@github.com:sandagolcea/tic-tac-toe.git`
-`cd tic-tac-toe`
-`bundle install`
-`ruby tic_tac_toe.rb`
+To play:
+
+`git@github.com:sandagolcea/tic-tac-toe.git` 
+
+`cd tic-tac-toe` 
+
+`bundle install` 
+
+`ruby tic_tac_toe.rb` 
+
 Enjoy!
 
 ##CRC
@@ -65,10 +72,10 @@ Checks if the game is over or not
 ####method switch players
 Changes the turn of the players
 
-###To Improve
+###Possible Improvements
 
 * checks for line and diagonal from the board can be made one function
-* cell could be just coordinates - I've made it a class for practice reasons
+* the cell class could be just coordinates - I've made it a class for practice reasons
 * application could be ported to web (done this in tic-tac-toe-web repo)
 * there is a display method for the board that shouldn't be there (removed in the web app) - as command logic should be separated from view logic.
 
