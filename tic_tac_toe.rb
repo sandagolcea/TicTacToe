@@ -2,6 +2,7 @@ require "./lib/Board"
 require "./lib/Player"
 require "cowsay"
 
+LINESIZE = 60
 #so far made cell and player
 def set_new_game
   # Create empty board
@@ -38,9 +39,9 @@ end
 
 def show_winner
   if @board.full? 
-    puts "\nIt's a draw!\n"
+    puts ("***It's a draw!***\n").center(LINESIZE)
   else
-    (puts Cowsay.say("#{@current_player.name.capitalize} wins!")) if @board.game_over?(@coord,@current_player)
+    puts Cowsay.say("#{@current_player.name.capitalize} wins!")
   end
 end
 
